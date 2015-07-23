@@ -1,54 +1,28 @@
 class ProductsController < ApplicationController
   before_action :set_product, only: [:show, :edit, :update, :destroy]
 
-  before_filter :authenticate_user!
+  before_filter :authenticate_user!, :except => [:show]
 
   # GET /products
   # GET /products.json
   def index
     @products = Product.all
-    @catagories = Catagory.all
-    @brands = []
-    Product.all.each do |product|
-      if @brands.include?(product.brand) == false
-        @brands.push(product.brand)
-      end
-    end
   end
 
   # GET /products/1
   # GET /products/1.json
   def show
     @catagories = Catagory.all
-    @brands = []
-    Product.all.each do |product|
-      if @brands.include?(product.brand) == false
-        @brands.push(product.brand)
-      end
-    end
   end
 
   # GET /products/new
   def new
     @product = Product.new
-    @catagories = Catagory.all
-    @brands = []
-    Product.all.each do |product|
-      if @brands.include?(product.brand) == false
-        @brands.push(product.brand)
-      end
-    end
   end
 
   # GET /products/1/edit
   def edit
     @catagories = Catagory.all
-    @brands = []
-    Product.all.each do |product|
-      if @brands.include?(product.brand) == false
-        @brands.push(product.brand)
-      end
-    end
   end
 
   # POST /products
@@ -99,6 +73,6 @@ class ProductsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def product_params
-      params.require(:product).permit(:name, :price, :description, :brand, :rating, :catagory_id, :image)
+      params.require(:product).permit(:name, :price, :description, :brand, :rating, :catagory_id, :image, :quantity)
     end
 end

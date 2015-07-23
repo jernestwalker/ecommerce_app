@@ -17,3 +17,8 @@
 .panel-body {
 	height: 300px;
 }
+
+.quantity-notice {
+	color:red;
+	font-size: 16px;
+}

@@ -7,7 +7,7 @@
 
 <p>
   <strong>Price:</strong>
-  <%= @product.price %>
+  <%= number_to_currency @product.price %>
 </p>
 
 <p>
@@ -26,9 +26,31 @@
 </p>
 
 <p>
-  <strong>Catagory:</strong>
-  <%= @product.catagory_id %>
+  <strong>Quantity:</strong>
+  <%= @product.quantity %>
 </p>
 
-<%= link_to 'Edit', edit_product_path(@product) %> |
-<%= link_to 'Back', products_path %>
+<p>
+  <strong>Catagory:</strong>
+  <%= @product.catagory.name %>
+</p>
+
+<% if @product.quantity == 0 %>
+  <p>SORRY! SOLD OUT!</p>
+<%else %>
+  <% if notice != nil %>
+    <p class="quantity-notice"><%= notice %></p>
+  <% end %>
+  <% end %>
+<p>
+  <%= form_tag(add_to_cart_path) do %>
+  <%= hidden_field_tag :product_id, @product.id %>
+  <%= number_field_tag :quantity, nil, placeholder: "How many?" %>
+  <%= submit_tag "Add to Cart", class: "btn btn-success" %>
+  <% end %>
+</p>
+
+<% if can? :update, @product %>
+  <%= link_to 'Edit', edit_product_path(@product) %> |
+  <%= link_to 'Back', products_path %>
+<% end %>

@@ -44,6 +44,11 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'devise'
+
 gem 'cancan'
 
 gem 'paperclip' 
+
+gem 'figaro'
+
+gem 'stripe', :git => 'https://github.com/stripe/stripe-ruby'
